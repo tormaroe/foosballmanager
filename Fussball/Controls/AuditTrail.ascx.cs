@@ -1,0 +1,32 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+namespace Fussball.Controls
+{
+    public partial class AuditTrail : System.Web.UI.UserControl
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+        }
+
+        public void Refresh()
+        {
+            Visible = true;
+
+            if (Fussball.SimplePointsSystem.AuditTrail.Instance == null)
+            {
+                PlayersUtil.LoadAuditTrail();
+            }
+            _grid.DataSource = Fussball.SimplePointsSystem.AuditTrail.Instance.DefaultView;
+            _grid.DataBind();
+        }
+    }
+}

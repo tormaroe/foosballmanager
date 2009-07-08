@@ -1,0 +1,59 @@
+﻿body 
+{
+	font-family:Verdana;
+	font-size:11px;
+	background-color:#93693d;
+	background-image:url('images/bg.jpg');
+}
+.mainbox
+{
+	border: solid 1px black; 
+	width: 700px; 
+	margin-top: 10px;
+	background-color:White;
+}
+.playerTable
+{
+	margin-top: 10px;
+}
+.textbox
+{
+	font-family:Verdana;
+	font-size:11px;
+}
+.footer
+{
+	width:700px;
+	color:#e4c580;
+	font-size:9px;
+}
+.header
+{
+	background-color:Black;
+	height:60px;
+	background-image:url('images/header.jpg');
+}
+.menu
+{
+	text-align:left;
+	background-color:#e5c889;
+	padding:0px;
+	margin:0px;
+}
+.bodyframe
+{
+	padding:10px;
+	
+}
+.button
+{
+	font-family:Verdana;
+	font-size:11px;
+}
+.menuButton
+{
+	background-color:#e5c889;
+	font-size:11px;
+	border-style:none;
+	cursor:pointer;
+}

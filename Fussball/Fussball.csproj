@@ -1,0 +1,208 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5C9BF66E-6808-4F2D-8B49-F74D6577B017}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fussball</RootNamespace>
+    <AssemblyName>Fussball</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Charts\SparkLine.aspx" />
+    <Content Include="Charts\SparkLineDuo.aspx" />
+    <Content Include="Controls\AddDoubleMatch.ascx" />
+    <Content Include="Controls\AddSingleMatch.ascx" />
+    <Content Include="Controls\AddUser.ascx" />
+    <Content Include="Controls\AdjustPlayer.ascx" />
+    <Content Include="Controls\AuditTrail.ascx" />
+    <Content Include="Controls\League.ascx" />
+    <Content Include="Controls\LeagueSettings.ascx" />
+    <Content Include="Controls\PlayerTable.ascx" />
+    <Content Include="Controls\Stats.ascx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Fussball.css" />
+    <Content Include="Global.asax" />
+    <Content Include="scripts\fussballscripts.js" />
+    <Content Include="images\bg.jpg" />
+    <Content Include="images\delete.png" />
+    <Content Include="images\header.jpg" />
+    <Content Include="images\sport_soccer.png" />
+    <Content Include="images\user.png" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Charts\SparkLine.aspx.cs">
+      <DependentUpon>SparkLine.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Charts\SparkLine.aspx.designer.cs">
+      <DependentUpon>SparkLine.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Charts\SparkLineDuo.aspx.cs">
+      <DependentUpon>SparkLineDuo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Charts\SparkLineDuo.aspx.designer.cs">
+      <DependentUpon>SparkLineDuo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddDoubleMatch.ascx.cs">
+      <DependentUpon>AddDoubleMatch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AddDoubleMatch.ascx.designer.cs">
+      <DependentUpon>AddDoubleMatch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddSingleMatch.ascx.cs">
+      <DependentUpon>AddSingleMatch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AddSingleMatch.ascx.designer.cs">
+      <DependentUpon>AddSingleMatch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddUser.ascx.cs">
+      <DependentUpon>AddUser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AddUser.ascx.designer.cs">
+      <DependentUpon>AddUser.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdjustPlayer.ascx.cs">
+      <DependentUpon>AdjustPlayer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AdjustPlayer.ascx.designer.cs">
+      <DependentUpon>AdjustPlayer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AuditTrail.ascx.cs">
+      <DependentUpon>AuditTrail.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AuditTrail.ascx.designer.cs">
+      <DependentUpon>AuditTrail.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\League.ascx.cs">
+      <DependentUpon>League.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\League.ascx.designer.cs">
+      <DependentUpon>League.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LeagueSettings.ascx.cs">
+      <DependentUpon>LeagueSettings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\LeagueSettings.ascx.designer.cs">
+      <DependentUpon>LeagueSettings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PlayerTable.ascx.cs">
+      <DependentUpon>PlayerTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\PlayerTable.ascx.designer.cs">
+      <DependentUpon>PlayerTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Stats.ascx.cs">
+      <DependentUpon>Stats.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\Stats.ascx.designer.cs">
+      <DependentUpon>Stats.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\PlayersUtil.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Classes\SparkLineData.cs" />
+    <Compile Include="Classes\SparkLineDuoData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fussball.SimplePointsSystem\Fussball.SimplePointsSystem.csproj">
+      <Project>{AE73B4AA-3830-4B9D-BDCB-4CE2B7311A0C}</Project>
+      <Name>Fussball.SimplePointsSystem</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64019</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
