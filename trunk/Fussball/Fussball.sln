@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fussball", "Fussball.csproj", "{5C9BF66E-6808-4F2D-8B49-F74D6577B017}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fussball.SimplePointsSystem", "..\Fussball.SimplePointsSystem\Fussball.SimplePointsSystem.csproj", "{AE73B4AA-3830-4B9D-BDCB-4CE2B7311A0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C9BF66E-6808-4F2D-8B49-F74D6577B017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C9BF66E-6808-4F2D-8B49-F74D6577B017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C9BF66E-6808-4F2D-8B49-F74D6577B017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C9BF66E-6808-4F2D-8B49-F74D6577B017}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE73B4AA-3830-4B9D-BDCB-4CE2B7311A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE73B4AA-3830-4B9D-BDCB-4CE2B7311A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE73B4AA-3830-4B9D-BDCB-4CE2B7311A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE73B4AA-3830-4B9D-BDCB-4CE2B7311A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

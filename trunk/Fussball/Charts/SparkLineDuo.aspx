@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SparkLineDuo.aspx.cs" Inherits="Fussball.Charts.SparkLineDuo" %>
