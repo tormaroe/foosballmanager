@@ -8,14 +8,10 @@ namespace Fussball.SimplePointsSystem
 {
     public class AuditTrail
     {
-
-        //private static AuditTrail _instance;
-
         public static AuditTrail Instance
         {
             get
-            {
-                //testing with application variable instead of static
+            {                
                 return System.Web.HttpContext.Current.Application["AuditTrail"] as AuditTrail;
             }
             set

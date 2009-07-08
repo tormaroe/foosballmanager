@@ -15,11 +15,11 @@ namespace Fussball.SimplePointsSystem
 
         public LeagueMatch(string player1Name, string player2Name)
         {
-            _playerName1 = player1Name;
-            _playerName2 = player2Name;
-            _playedWhen = null;
-            _winner = null;
-            _id = Guid.NewGuid();
+            PlayerName1 = player1Name;
+            PlayerName2 = player2Name;
+            PlayedWhen = null;
+            Winner = null;
+            Id = Guid.NewGuid();
         }
 
         private LeagueMatch()
@@ -52,77 +52,16 @@ namespace Fussball.SimplePointsSystem
                 + "</leagueMatch>";
         }
 
-        #region properties
-        private Guid _id;
+        
+        public Guid Id  { get; set; }
 
-        public Guid Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
+        public string PlayerName1  { get; set; }        
 
+        public string PlayerName2  { get; set; }
 
-        private string _playerName1;
+        public DateTime? PlayedWhen  { get; set; }
 
-        public string PlayerName1
-        {
-            get
-            {
-                return _playerName1;
-            }
-            set
-            {
-                _playerName1 = value;
-            }
-        }
-        private string _playerName2;
-
-        public string PlayerName2
-        {
-            get
-            {
-                return _playerName2;
-            }
-            set
-            {
-                _playerName2 = value;
-            }
-        }
-
-        private DateTime? _playedWhen;
-
-        public DateTime? PlayedWhen
-        {
-            get
-            {
-                return _playedWhen;
-            }
-            set
-            {
-                _playedWhen = value;
-            }
-        }
-
-        private string _winner;
-
-        public string Winner
-        {
-            get
-            {
-                return _winner;
-            }
-            set
-            {
-                _winner = value;
-            }
-        }
-        #endregion
+        public string Winner  { get; set; }
     }
 
 

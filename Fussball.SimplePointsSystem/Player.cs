@@ -21,19 +21,18 @@ namespace Fussball.SimplePointsSystem
         public Player(string name)
         {
             _id = Guid.NewGuid();
-            _name = name;
+            Name = name;
             SinglesWon = 0;
             SinglesLost = 0;
             DoublesWon = 0;
             DoublesLost = 0;
             LeaguePoints = 0;
             LeagueMatchesPlayed = 0;
-            _points = Constants.DEFAULT_PLAYER_POINTS;
+            Points = Constants.DEFAULT_PLAYER_POINTS;
         }
 
         private Player()
         {
-
         }
 
         public static Player GetPlayer(XmlNode node)
@@ -55,21 +54,21 @@ namespace Fussball.SimplePointsSystem
 
             p._id = new Guid(node.Attributes[ID_ATTRIBUTE].Value);
 
-            p._name = node.SelectSingleNode(NAME_ELEMENT).InnerText;
-            p._numOfDoublesLost = Convert.ToInt32(node.SelectSingleNode(DOUBLESLOST_ELEMENT).InnerText);
-            p._numOfDoublesWon = Convert.ToInt32(node.SelectSingleNode(DOUBLESWON_ELEMENT).InnerText);
-            p._numOfSinglesLost = Convert.ToInt32(node.SelectSingleNode(SINGLESLOST_ELEMENT).InnerText);
-            p._numOfSinglesWon = Convert.ToInt32(node.SelectSingleNode(SINGLESWON_ELEMENT).InnerText);
-            p._points = Convert.ToInt32(node.SelectSingleNode(POINTS_ELEMENT).InnerText);
+            p.Name = node.SelectSingleNode(NAME_ELEMENT).InnerText;
+            p.DoublesLost = Convert.ToInt32(node.SelectSingleNode(DOUBLESLOST_ELEMENT).InnerText);
+            p.DoublesWon = Convert.ToInt32(node.SelectSingleNode(DOUBLESWON_ELEMENT).InnerText);
+            p.SinglesLost = Convert.ToInt32(node.SelectSingleNode(SINGLESLOST_ELEMENT).InnerText);
+            p.SinglesWon = Convert.ToInt32(node.SelectSingleNode(SINGLESWON_ELEMENT).InnerText);
+            p.Points = Convert.ToInt32(node.SelectSingleNode(POINTS_ELEMENT).InnerText);
 
             if (node.SelectSingleNode(LEAGUEPOINTS_ELEMENT) != null)
             {
-                p._leaguePoints = Convert.ToInt32(node.SelectSingleNode(LEAGUEPOINTS_ELEMENT).InnerText);
+                p.LeaguePoints = Convert.ToInt32(node.SelectSingleNode(LEAGUEPOINTS_ELEMENT).InnerText);
             }
 
             if (node.SelectSingleNode(LEAGUEMATCHES_ELEMENT) != null)
             {
-                p._leagueMatchesPlayed = Convert.ToInt32(node.SelectSingleNode(LEAGUEMATCHES_ELEMENT).InnerText);
+                p.LeagueMatchesPlayed = Convert.ToInt32(node.SelectSingleNode(LEAGUEMATCHES_ELEMENT).InnerText);
             }
 
             return p;
@@ -78,18 +77,16 @@ namespace Fussball.SimplePointsSystem
         public string ToXml()
         {
             return string.Format("<player {0}=\"{1}\">", ID_ATTRIBUTE, _id.ToString())
-                + Common.CreateElement(SINGLESLOST_ELEMENT, _numOfSinglesLost.ToString())
-                + Common.CreateElement(SINGLESWON_ELEMENT, _numOfSinglesWon.ToString())
-                + Common.CreateElement(DOUBLESLOST_ELEMENT, _numOfDoublesLost.ToString())
-                + Common.CreateElement(DOUBLESWON_ELEMENT, _numOfDoublesWon.ToString())
-                + Common.CreateElement(POINTS_ELEMENT, _points.ToString())
-                + Common.CreateElement(LEAGUEPOINTS_ELEMENT, _leaguePoints.ToString())
-                + Common.CreateElement(LEAGUEMATCHES_ELEMENT, _leagueMatchesPlayed.ToString())
-                + Common.CreateElement(NAME_ELEMENT, _name)
+                + Common.CreateElement(SINGLESLOST_ELEMENT, SinglesLost.ToString())
+                + Common.CreateElement(SINGLESWON_ELEMENT, SinglesWon.ToString())
+                + Common.CreateElement(DOUBLESLOST_ELEMENT, DoublesLost.ToString())
+                + Common.CreateElement(DOUBLESWON_ELEMENT, DoublesWon.ToString())
+                + Common.CreateElement(POINTS_ELEMENT, Points.ToString())
+                + Common.CreateElement(LEAGUEPOINTS_ELEMENT, LeaguePoints.ToString())
+                + Common.CreateElement(LEAGUEMATCHES_ELEMENT, LeagueMatchesPlayed.ToString())
+                + Common.CreateElement(NAME_ELEMENT, Name)
                 + "</player>";
         }
-
-        #region properties
 
         private Guid _id;
 
@@ -100,65 +97,11 @@ namespace Fussball.SimplePointsSystem
                 return _id;
             }
         }
-
-
-        private int _points;
-
-        public int Points
-        {
-            get
-            {
-                return _points;
-            }
-            set
-            {
-                _points = value;
-            }
-        }
-
-        private int _leagueMatchesPlayed;
-
-        public int LeagueMatchesPlayed
-        {
-            get
-            {
-                return _leagueMatchesPlayed;
-            }
-            set
-            {
-                _leagueMatchesPlayed = value;
-            }
-        }
-
-
-        private int _leaguePoints;
-
-        public int LeaguePoints
-        {
-            get
-            {
-                return _leaguePoints;
-            }
-            set
-            {
-                _leaguePoints = value;
-            }
-        }
-
-
-        private string _name;
-
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
-        }
+        
+        public int Points { get; set; }
+        public int LeagueMatchesPlayed { get; set; }        
+        public int LeaguePoints { get; set; }        
+        public string Name { get; set; }
         
         public int GamesPlayed
         {
@@ -168,63 +111,10 @@ namespace Fussball.SimplePointsSystem
             }            
         }
 
-        private int _numOfSinglesWon;
+        public int SinglesWon { get; set; }
+        public int SinglesLost { get; set; }
+        public int DoublesWon { get; set; }
+        public int DoublesLost { get; set; }
 
-        public int SinglesWon
-        {
-            get
-            {
-                return _numOfSinglesWon;
-            }
-            set
-            {
-                _numOfSinglesWon = value;
-            }
-        }
-
-        private int _numOfSinglesLost;
-
-        public int SinglesLost
-        {
-            get
-            {
-                return _numOfSinglesLost;
-            }
-            set
-            {
-                _numOfSinglesLost = value;
-            }
-        }
-
-        private int _numOfDoublesWon;
-
-        public int DoublesWon
-        {
-            get
-            {
-                return _numOfDoublesWon;
-            }
-            set
-            {
-                _numOfDoublesWon = value;
-            }
-        }
-
-        private int _numOfDoublesLost;
-
-        public int DoublesLost
-        {
-            get
-            {
-                return _numOfDoublesLost;
-            }
-            set
-            {
-                _numOfDoublesLost = value;
-            }
-        }
-
-
-        #endregion
     }
 }
