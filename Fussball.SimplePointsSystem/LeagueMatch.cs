@@ -7,12 +7,7 @@ namespace Fussball.SimplePointsSystem
 {
     public class LeagueMatch
     {
-        private const string ID_ELEMENT = "id";
-        private const string PLAYER1_ELEMENT = "player1";
-        private const string PLAYER2_ELEMENT = "player2";
-        private const string WHEN_ELEMENT = "when";
-        private const string WINNER_ELEMENT = "winner";
-
+        
         public LeagueMatch(string player1Name, string player2Name)
         {
             PlayerName1 = player1Name;
@@ -22,46 +17,43 @@ namespace Fussball.SimplePointsSystem
             Id = Guid.NewGuid();
         }
 
-        private LeagueMatch()
+        internal LeagueMatch()
         {
 
         }
-
-        public static LeagueMatch GetLeagueMatch(XmlNode node)
-        {
-            LeagueMatch lm = new LeagueMatch();
-
-            lm.Id = new Guid(node.SelectSingleNode(ID_ELEMENT).InnerText);
-            lm.PlayerName1 = node.SelectSingleNode(PLAYER1_ELEMENT).InnerText;
-            lm.PlayerName2 = node.SelectSingleNode(PLAYER2_ELEMENT).InnerText;
-            if(node.SelectSingleNode(WHEN_ELEMENT).InnerText != string.Empty)
-                lm.PlayedWhen = UnixTime.GetDateFromUnixTime(Convert.ToDouble(node.SelectSingleNode(WHEN_ELEMENT).InnerText));
-            lm.Winner = node.SelectSingleNode(WINNER_ELEMENT).InnerText;
-
-            return lm;
-        }
-
-        public string ToXml()
-        {
-            return "<leagueMatch>"
-                + CommonXml.CreateElement(ID_ELEMENT, Id.ToString())
-                + CommonXml.CreateElement(PLAYER1_ELEMENT, PlayerName1)
-                + CommonXml.CreateElement(PLAYER2_ELEMENT, PlayerName2)
-                + CommonXml.CreateElement(WHEN_ELEMENT, (PlayedWhen.HasValue ? UnixTime.GetUnixTime(PlayedWhen.Value).ToString() : string.Empty))
-                + CommonXml.CreateElement(WINNER_ELEMENT, Winner)
-                + "</leagueMatch>";
-        }
-
         
-        public Guid Id  { get; set; }
+        public Guid Id  { get; internal set; }
+        public string PlayerName1 { get; internal set; }
+        public string PlayerName2 { get; internal set; }
+        public DateTime? PlayedWhen { get; internal set; }
+        public string Winner { get; internal set; }
 
-        public string PlayerName1  { get; set; }        
+        public bool IsNotPlayedYet
+        {
+            get
+            {
+                return string.IsNullOrEmpty(Winner);
+            }
+        }
 
-        public string PlayerName2  { get; set; }
+        public bool IsMatchBetween(Player winner, Player looser)
+        {
+            return (PlayerName1.Equals(winner.Name) && PlayerName2.Equals(looser.Name))
+                    ||
+                    (PlayerName1.Equals(looser.Name) && PlayerName2.Equals(winner.Name));
+        }
 
-        public DateTime? PlayedWhen  { get; set; }
+        public void SetResult(Player winner)
+        {
+            PlayedWhen = DateTime.Now;
+            Winner = winner.Name;
+        }
 
-        public string Winner  { get; set; }
+        public void ClearResult()
+        {
+            Winner = null;
+            PlayedWhen = null;
+        }
     }
 
 

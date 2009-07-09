@@ -50,7 +50,7 @@
     <Compile Include="AnalyseResult.cs" />
     <Compile Include="AuditTrail.cs" />
     <Compile Include="AuditTrailItem.cs" />
-    <Compile Include="AuditTrailXML.cs" />
+    <Compile Include="Persistance\AuditTrailXML.cs" />
     <Compile Include="CalculationResult.cs" />
     <Compile Include="CommonXml.cs" />
     <Compile Include="GameRegistration.cs" />
@@ -65,6 +65,7 @@
     <Compile Include="GameRegistrators\LowestScoreWonWithBigDifferenceDoubleGameRegistrator.cs" />
     <Compile Include="GameRegistrators\LowestScoreWonWithBigDifferenceSingleGameRegistrator.cs" />
     <Compile Include="GameRegistrators\SingleGameRegistrator.cs" />
+    <Compile Include="Persistance\LeagueMatchesXML.cs" />
     <Compile Include="UnixTime.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="GameCalculator.cs" />

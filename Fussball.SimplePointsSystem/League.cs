@@ -6,39 +6,13 @@ namespace Fussball.SimplePointsSystem
 {
     public class League
     {
-        private LeagueMatches _matches;
-
-        public LeagueMatches Matches
-        {
-            get
-            {
-                return _matches;
-            }
-            set
-            {
-                _matches = value;
-            }
-        }
-
-        private Players _players;
-
-        public Players Players
-        {
-            get
-            {
-                return _players;
-            }
-            set
-            {
-                _players = value;
-            }
-        }
-
+        public LeagueMatches Matches { get; set; }
+        public Players Players { get; set; }
 
         public League(LeagueMatches matches, Players players)
         {
-            _matches = matches;
-            _players = players;
+            Matches = matches;
+            Players = players;
         }
 
         public static League Instance
@@ -56,20 +30,20 @@ namespace Fussball.SimplePointsSystem
 
         public int GenerateMatches(int leagueSize)
         {
-            _matches = new LeagueMatches();
+            Matches = new LeagueMatches();
             int generatedMatches = 0;
             
 
-            foreach (Player p1 in _players.AllPlayers)
+            foreach (Player p1 in Players.AllPlayers)
             {
-                foreach (Player p2 in _players.AllPlayers)
+                foreach (Player p2 in Players.AllPlayers)
                 {
                     if (p2.Name != p1.Name)
                     {
                         for (int i = 0; i < leagueSize; i++)
                         {
                             LeagueMatch m = new LeagueMatch(p1.Name, p2.Name);
-                            _matches.Add(m);
+                            Matches.Add(m);
                             generatedMatches++;
                         }
                     }
@@ -78,26 +52,17 @@ namespace Fussball.SimplePointsSystem
             return generatedMatches;
         }
 
-
         public bool TryAddMatchResult(Player winner, Player looser)
         {
-            if (_matches == null)
+            if (Matches == null)
                 throw new Exception("LeagueMatches is null, can't add the match to league");
             
-            foreach (LeagueMatch match in _matches.AllMatches)
+            foreach (LeagueMatch match in Matches.AllMatches)
             {
-                if (string.IsNullOrEmpty(match.Winner))
+                if (match.IsNotPlayedYet && match.IsMatchBetween(winner, looser))
                 {
-                    if (
-                        (match.PlayerName1.Equals(winner.Name) && match.PlayerName2.Equals(looser.Name))
-                        ||
-                        (match.PlayerName1.Equals(looser.Name) && match.PlayerName2.Equals(winner.Name))
-                        )
-                    {
-                        match.PlayedWhen = DateTime.Now;
-                        match.Winner = winner.Name;
-                        return true;
-                    }
+                    match.SetResult(winner);
+                    return true;
                 }
             }
             return false;
@@ -105,7 +70,7 @@ namespace Fussball.SimplePointsSystem
 
         public void ResetPlayerPoints()
         {
-            foreach (Player p in _players.AllPlayers)
+            foreach (Player p in Players.AllPlayers)
             {
                 p.LeaguePoints = 0;
                 p.LeagueMatchesPlayed = 0;
@@ -114,17 +79,16 @@ namespace Fussball.SimplePointsSystem
 
         public void ClearResult(Guid matchId)
         {
-            LeagueMatch match = _matches.GetById(matchId);
+            LeagueMatch match = Matches.GetById(matchId);
 
-            Player winner = _players.GetByName(match.Winner);
-            Player looser = _players.GetByName((match.Winner == match.PlayerName1 ? match.PlayerName2 : match.PlayerName1));
+            Player winner = Players.GetByName(match.Winner);
+            Player looser = Players.GetByName((match.Winner == match.PlayerName1 ? match.PlayerName2 : match.PlayerName1));
 
             winner.LeaguePoints = winner.LeaguePoints - 1;
             winner.LeagueMatchesPlayed = winner.LeagueMatchesPlayed - 1;
             looser.LeagueMatchesPlayed = looser.LeagueMatchesPlayed - 1;
 
-            match.Winner = null;
-            match.PlayedWhen = null;
+            match.ClearResult();
         }
     }
 }

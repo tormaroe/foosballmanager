@@ -36,13 +36,13 @@ public class PlayersUtil
 
             if (File.Exists(matchespath))
             {
-                matches = new LeagueMatches(ReadTextFile(matchespath));
+                matches = LeagueMatchesXML.CreateLeagueMatchesFromXml(ReadTextFile(matchespath));
             }
             else
             {
                 using (FileStream fs = File.Create(matchespath)) { }
                 matches = new LeagueMatches();
-                SaveFile(matches.ToXml(), matchespath);
+                SaveFile(LeagueMatchesXML.ToXml(matches), matchespath);
             }
 
             if (File.Exists(playerspath))
@@ -68,7 +68,7 @@ public class PlayersUtil
             {
                 string matchespath = ConfigurationManager.AppSettings["leaguematchesfile"];
                 string playerspath = ConfigurationManager.AppSettings["leagueplayersfile"];
-                SaveFile(League.Instance.Matches.ToXml(), matchespath);
+                SaveFile(LeagueMatchesXML.ToXml(League.Instance.Matches), matchespath);
                 SaveFile(League.Instance.Players.ToXml(), playerspath);
             }
         }
