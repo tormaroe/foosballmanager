@@ -47,13 +47,13 @@ public class PlayersUtil
 
             if (File.Exists(playerspath))
             {
-                players = new Players(ReadTextFile(playerspath));
+                players = PlayersXML.CreatePlayersFromXml(ReadTextFile(playerspath));
             }
             else
             {
                 using (FileStream fs = File.Create(playerspath)) { }
                 players = new Players();
-                SaveFile(players.ToXml(), playerspath);
+                SaveFile(PlayersXML.ToXml(players), playerspath);
             }
 
             League.Instance = new League(matches, players);
@@ -69,7 +69,7 @@ public class PlayersUtil
                 string matchespath = ConfigurationManager.AppSettings["leaguematchesfile"];
                 string playerspath = ConfigurationManager.AppSettings["leagueplayersfile"];
                 SaveFile(LeagueMatchesXML.ToXml(League.Instance.Matches), matchespath);
-                SaveFile(League.Instance.Players.ToXml(), playerspath);
+                SaveFile(PlayersXML.ToXml(League.Instance.Players), playerspath);
             }
         }
     }
@@ -109,23 +109,8 @@ public class PlayersUtil
         {
             string path = ConfigurationManager.AppSettings["playersfile"];
             if (File.Exists(path))
-            {
-                //StringBuilder xml = new StringBuilder();
-
-                //using (FileStream fs = File.OpenRead(path))
-                //{
-                //    byte[] b = new byte[1024];
-                //    UTF8Encoding temp = new UTF8Encoding(true);
-
-                //    while (fs.Read(b, 0, b.Length) > 0)
-                //    {
-                //        xml.Append(temp.GetString(b));
-                //    }
-                //}
-              
-                //Players pTemp = new Players(xml.ToString());
-
-                Players pTemp = new Players(ReadTextFile(path));
+            {                
+                Players pTemp = PlayersXML.CreatePlayersFromXml(ReadTextFile(path));
 
                 ThePlayers = pTemp;
 
@@ -143,12 +128,7 @@ public class PlayersUtil
 
     private static void SaveThePlayers(string path)
     {
-        //using (FileStream stream = File.OpenWrite(path))
-        //{
-        //    Byte[] xml = new UTF8Encoding(true).GetBytes(ThePlayers.ToXml());
-        //    stream.Write(xml, 0, xml.Length);
-        //}
-        SaveFile(ThePlayers.ToXml(), path);
+        SaveFile(PlayersXML.ToXml(ThePlayers), path);
     }
 
     #endregion
