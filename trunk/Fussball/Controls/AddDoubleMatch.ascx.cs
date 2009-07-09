@@ -59,7 +59,7 @@ namespace Fussball.Controls
                 return;
             }
 
-            GameCalculator.RegisterDoubleGame(
+            GameRegistration.RegisterDoubleGame(
                 PlayersUtil.ThePlayers[winner1Id],
                 PlayersUtil.ThePlayers[winner2Id],
                 PlayersUtil.ThePlayers[looser1Id],
