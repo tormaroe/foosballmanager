@@ -66,6 +66,7 @@
     <Compile Include="GameRegistrators\LowestScoreWonWithBigDifferenceSingleGameRegistrator.cs" />
     <Compile Include="GameRegistrators\SingleGameRegistrator.cs" />
     <Compile Include="Persistance\LeagueMatchesXML.cs" />
+    <Compile Include="Persistance\PlayersXML.cs" />
     <Compile Include="UnixTime.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="GameCalculator.cs" />

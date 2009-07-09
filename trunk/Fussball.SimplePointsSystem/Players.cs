@@ -7,24 +7,11 @@ namespace Fussball.SimplePointsSystem
 {
     public class Players
     {
-        private Dictionary<Guid, Player> _players;
+        internal Dictionary<Guid, Player> _players;
 
         public Players()
         {
             _players = new Dictionary<Guid, Player>();
-        }
-
-        public Players(string xml)
-        {            
-
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml);
-            LoadFromXml(doc.DocumentElement);
-        }
-
-        public Players(XmlNode node)
-        {
-            LoadFromXml(node);
         }
 
         public List<Player> AllPlayers
@@ -38,32 +25,6 @@ namespace Fussball.SimplePointsSystem
                 }
                 return pList;
             }
-        }
-
-        private void LoadFromXml(XmlNode node)
-        {
-            _players = new Dictionary<Guid, Player>();
-
-            XmlNodeList playersNodes = node.ChildNodes;
-            foreach (XmlNode playerNode in playersNodes)
-            {
-                Player p = Player.GetPlayer(playerNode);
-                _players.Add(p.Id, p);
-            }
-        }
-
-        public string ToXml()
-        {
-            StringBuilder xml = new StringBuilder("<players>");
-
-            foreach (KeyValuePair<Guid, Player> playerInfo in _players)
-            {
-                xml.Append(playerInfo.Value.ToXml());
-            }
-
-            xml.Append("</players>");
-
-            return xml.ToString();
         }
 
         public void Add(Player player)
@@ -88,7 +49,6 @@ namespace Fussball.SimplePointsSystem
                 return _players[Id];
             }
         }
-
 
         internal Player GetByName(string playerName)
         {
