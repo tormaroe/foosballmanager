@@ -20,9 +20,6 @@ public class PlayersUtil
 
     public PlayersUtil()
     {
-        //
-        // TODO: Add constructor logic here
-        //
     }
 
     #region league
@@ -165,7 +162,7 @@ public class PlayersUtil
             string path = ConfigurationManager.AppSettings["audittrailfile"];
             if (File.Exists(path))
             {                
-                AuditTrail.Instance = new AuditTrail(ReadTextFile(path));
+                AuditTrail.Instance = AuditTrailXML.CreateAuditTrailFromXml(ReadTextFile(path));
             }
             else
             {
@@ -187,12 +184,7 @@ public class PlayersUtil
 
     private static void SaveAuditTrailFile(string path)
     {
-        //using (FileStream stream = File.OpenWrite(path))
-        //{
-        //    Byte[] xml = new UTF8Encoding(true).GetBytes(AuditTrail.Instance.ToXml());
-        //    stream.Write(xml, 0, xml.Length);
-        //}
-        SaveFile(AuditTrail.Instance.ToXml(), path);
+        SaveFile(AuditTrailXML.ToXml(AuditTrail.Instance), path);
     }
 
     #endregion

@@ -60,45 +60,7 @@ namespace Fussball.SimplePointsSystem
         {
             _items = new List<AuditTrailItem>();
         }
-
-        public AuditTrail(string xml) : this()
-        {
-            LoadItemsFromXml(xml);
-        }
-
-        private void LoadItemsFromXml(string xml)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml);
-
-            XmlNodeList itemNodes = doc.DocumentElement.ChildNodes;
-            foreach (XmlNode node in itemNodes)
-            {
-                AuditTrailItem item = new AuditTrailItem()
-                {
-                    When = Common.GetDateFromUnixTime(Convert.ToDouble(node.SelectSingleNode("when").InnerText)),
-                    What = node.SelectSingleNode("what").InnerText,
-                    CssAttributes = node.SelectSingleNode("css").InnerText
-                };
-                _items.Add(item);
-            }
-        }
-        public string ToXml()
-        {
-            StringBuilder xml = new StringBuilder("<audittrail>");
-
-            foreach (AuditTrailItem item in _items)
-            {
-                xml.AppendFormat("<item><when>{0}</when><what>{1}</what><css>{2}</css></item>",
-                    Common.GetUnixTime(item.When),
-                    item.What,
-                    item.CssAttributes);
-            }
-
-            xml.Append("</audittrail>");
-            return xml.ToString();
-        }
-
+        
         public void AddManualAudit(string message)
         {
             AuditTrailItem item = new AuditTrailItem();
