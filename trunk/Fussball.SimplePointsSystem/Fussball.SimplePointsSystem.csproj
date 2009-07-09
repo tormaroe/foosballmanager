@@ -50,6 +50,7 @@
     <Compile Include="AnalyseResult.cs" />
     <Compile Include="AuditTrail.cs" />
     <Compile Include="AuditTrailItem.cs" />
+    <Compile Include="AuditTrailXML.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="GameCalculator.cs" />
