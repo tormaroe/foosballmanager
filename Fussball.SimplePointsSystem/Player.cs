@@ -7,6 +7,7 @@ namespace Fussball.SimplePointsSystem
 {
     public class Player
     {
+        internal const int DEFAULT_PLAYER_POINTS = 1200;
 
         public Player(string name)
         {
@@ -18,7 +19,7 @@ namespace Fussball.SimplePointsSystem
             DoublesLost = 0;
             LeaguePoints = 0;
             LeagueMatchesPlayed = 0;
-            Points = Constants.DEFAULT_PLAYER_POINTS;
+            Points = DEFAULT_PLAYER_POINTS;
         }
 
         internal Player()

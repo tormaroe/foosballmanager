@@ -52,7 +52,7 @@
     <Compile Include="AuditTrailItem.cs" />
     <Compile Include="Persistance\AuditTrailXML.cs" />
     <Compile Include="CalculationResult.cs" />
-    <Compile Include="CommonXml.cs" />
+    <Compile Include="Persistance\CommonXml.cs" />
     <Compile Include="GameRegistration.cs" />
     <Compile Include="GameRegistrators\DoubleGameRegistrator.cs" />
     <Compile Include="GameRegistrators\GameRegistrator.cs" />
@@ -68,7 +68,6 @@
     <Compile Include="Persistance\LeagueMatchesXML.cs" />
     <Compile Include="Persistance\PlayersXML.cs" />
     <Compile Include="UnixTime.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="GameCalculator.cs" />
     <Compile Include="League.cs" />
     <Compile Include="LeagueMatch.cs" />

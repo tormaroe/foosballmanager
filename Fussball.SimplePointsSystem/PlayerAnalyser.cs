@@ -18,7 +18,7 @@ namespace Fussball.SimplePointsSystem
             _playerScoreChangedText = string.Format("{0}'s score changed to ", playerName);
 
             _result = new AnalysePlayerResult();
-            _result.Points.Add(Constants.DEFAULT_PLAYER_POINTS);
+            _result.Points.Add(Player.DEFAULT_PLAYER_POINTS);
 
             foreach (AuditTrailItem item in _auditTrail.Items)
             {
