@@ -57,8 +57,7 @@ namespace Fussball.Controls
                 return;
             }
 
-            Fussball.SimplePointsSystem.AuditTrail.AnalyseResult result =
-                Fussball.SimplePointsSystem.AuditTrail.Instance.AnalyseMatches(_player1.SelectedItem.Text, _player2.SelectedItem.Text);
+            AnalyseResult result = Fussball.SimplePointsSystem.AuditTrail.Instance.AnalyseMatches(_player1.SelectedItem.Text, _player2.SelectedItem.Text);
 
             string message = "";
 
@@ -66,13 +65,13 @@ namespace Fussball.Controls
                 _player1.SelectedItem.Text,
                 result.GamesWonByPlayer1,
                 _player2.SelectedItem.Text,
-                result.GamesWinByPlayer2);
+                result.GamesWonByPlayer2);
 
-            if (result.GamesWonByPlayer1 != result.GamesWinByPlayer2)
+            if (result.GamesWonByPlayer1 != result.GamesWonByPlayer2)
             {
                 message += string.Format("<br/>So all-in-all {0} won by {1} matches.",
-                    (result.GamesWonByPlayer1 > result.GamesWinByPlayer2 ? _player1.SelectedItem.Text : _player2.SelectedItem.Text),
-                    Math.Abs(result.GamesWonByPlayer1 - result.GamesWinByPlayer2));
+                    (result.GamesWonByPlayer1 > result.GamesWonByPlayer2 ? _player1.SelectedItem.Text : _player2.SelectedItem.Text),
+                    Math.Abs(result.GamesWonByPlayer1 - result.GamesWonByPlayer2));
             }
 
             message += string.Format("<br/>{0} took {1} points from {2} and lost {3}.",
@@ -125,8 +124,7 @@ namespace Fussball.Controls
         private SparkLineData GenerateChart(Guid playerGuid, Image image)
         {
 
-            Fussball.SimplePointsSystem.AuditTrail.AnalysePlayerResult result = 
-                Fussball.SimplePointsSystem.AuditTrail.Instance.AnalysePlayer(PlayersUtil.ThePlayers[playerGuid].Name);
+            AnalysePlayerResult result = Fussball.SimplePointsSystem.AuditTrail.Instance.AnalysePlayer(PlayersUtil.ThePlayers[playerGuid].Name);
 
             string chartKey = Guid.NewGuid().ToString();
             SparkLineData spd = new SparkLineData();

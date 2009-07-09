@@ -46,13 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalysePlayerResult.cs" />
+    <Compile Include="AnalyseResult.cs" />
     <Compile Include="AuditTrail.cs" />
+    <Compile Include="AuditTrailItem.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="GameCalculator.cs" />
     <Compile Include="League.cs" />
     <Compile Include="LeagueMatch.cs" />
     <Compile Include="LeagueMatches.cs" />
+    <Compile Include="MatchAnalyser.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Players.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
