@@ -22,6 +22,12 @@ namespace Fussball.SimplePointsSystem
 
         private List<AuditTrailItem> _items;
 
+        public AuditTrail()
+        {
+            _items = new List<AuditTrailItem>();
+        }
+
+
         internal List<AuditTrailItem> Items
         {
             get
@@ -56,11 +62,6 @@ namespace Fussball.SimplePointsSystem
             }
         }
 
-        public AuditTrail()
-        {
-            _items = new List<AuditTrailItem>();
-        }
-        
         public void AddManualAudit(string message)
         {
             AuditTrailItem item = new AuditTrailItem();

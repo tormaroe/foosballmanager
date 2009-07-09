@@ -77,14 +77,14 @@ namespace Fussball.SimplePointsSystem
         public string ToXml()
         {
             return string.Format("<player {0}=\"{1}\">", ID_ATTRIBUTE, _id.ToString())
-                + Common.CreateElement(SINGLESLOST_ELEMENT, SinglesLost.ToString())
-                + Common.CreateElement(SINGLESWON_ELEMENT, SinglesWon.ToString())
-                + Common.CreateElement(DOUBLESLOST_ELEMENT, DoublesLost.ToString())
-                + Common.CreateElement(DOUBLESWON_ELEMENT, DoublesWon.ToString())
-                + Common.CreateElement(POINTS_ELEMENT, Points.ToString())
-                + Common.CreateElement(LEAGUEPOINTS_ELEMENT, LeaguePoints.ToString())
-                + Common.CreateElement(LEAGUEMATCHES_ELEMENT, LeagueMatchesPlayed.ToString())
-                + Common.CreateElement(NAME_ELEMENT, Name)
+                + CommonXml.CreateElement(SINGLESLOST_ELEMENT, SinglesLost.ToString())
+                + CommonXml.CreateElement(SINGLESWON_ELEMENT, SinglesWon.ToString())
+                + CommonXml.CreateElement(DOUBLESLOST_ELEMENT, DoublesLost.ToString())
+                + CommonXml.CreateElement(DOUBLESWON_ELEMENT, DoublesWon.ToString())
+                + CommonXml.CreateElement(POINTS_ELEMENT, Points.ToString())
+                + CommonXml.CreateElement(LEAGUEPOINTS_ELEMENT, LeaguePoints.ToString())
+                + CommonXml.CreateElement(LEAGUEMATCHES_ELEMENT, LeagueMatchesPlayed.ToString())
+                + CommonXml.CreateElement(NAME_ELEMENT, Name)
                 + "</player>";
         }
 
