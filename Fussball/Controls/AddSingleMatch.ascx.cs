@@ -59,9 +59,7 @@ namespace Fussball.Controls
             Player winner = PlayersUtil.ThePlayers[winnerId];
             Player looser = PlayersUtil.ThePlayers[looserId];
 
-            GameCalculator.RegisterSimpleGame(
-                winner,
-                looser);
+            GameRegistration.RegisterSimpleGame(winner, looser);
 
             ShowMessage(string.Format("Game registered. Congratulations, {0}, you now have {1} points!",
                 winner.Name,
