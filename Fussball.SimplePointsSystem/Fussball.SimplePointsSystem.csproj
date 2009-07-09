@@ -58,6 +58,7 @@
     <Compile Include="LeagueMatches.cs" />
     <Compile Include="MatchAnalyser.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerAnalyser.cs" />
     <Compile Include="Players.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

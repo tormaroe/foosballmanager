@@ -61,10 +61,13 @@ namespace Fussball.SimplePointsSystem
             _items = new List<AuditTrailItem>();
         }
 
-        public AuditTrail(string xml)
+        public AuditTrail(string xml) : this()
         {
-            _items = new List<AuditTrailItem>();
-            
+            LoadItemsFromXml(xml);
+        }
+
+        private void LoadItemsFromXml(string xml)
+        {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
 
@@ -80,7 +83,6 @@ namespace Fussball.SimplePointsSystem
                 _items.Add(item);
             }
         }
-
         public string ToXml()
         {
             StringBuilder xml = new StringBuilder("<audittrail>");
@@ -145,8 +147,6 @@ namespace Fussball.SimplePointsSystem
             _items.Add(item);
         }
 
-        
-
         public AnalyseResult AnalyseMatches(string playerName1, string playerName2)
         {
             var matchAnalyser = new MatchAnalyser(this);
@@ -155,27 +155,8 @@ namespace Fussball.SimplePointsSystem
 
         public AnalysePlayerResult AnalysePlayer(string playerName)
         {
-            string playerScoreChangedText = string.Format("{0}'s score changed to ",
-                playerName);
-
-            AnalysePlayerResult result = new AnalysePlayerResult();
-            result.Points.Add(Constants.DEFAULT_PLAYER_POINTS);
-
-            foreach (AuditTrailItem item in _items)
-            {
-                if (item.What.StartsWith(playerScoreChangedText))
-                {
-                    string sPoints = item.What.Substring(playerScoreChangedText.Length);
-                    sPoints = sPoints.Substring(0, sPoints.IndexOf(" "));
-                    result.Points.Add(Int32.Parse(sPoints));
-                }
-            }
-
-            return result;
-        }
-
-        
-
-        
+            var playerAnalyser = new PlayerAnalyser(this);
+            return playerAnalyser.Analyse(playerName);            
+        }       
     }
 }

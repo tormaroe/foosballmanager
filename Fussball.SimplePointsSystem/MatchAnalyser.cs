@@ -10,6 +10,9 @@ namespace Fussball.SimplePointsSystem
 
         private bool _player1WasTheWinner;
         private AnalyseResult _result;
+        private string _winnerWhatPrefix;
+        private string _looserWhatPrefix;
+
 
         public MatchAnalyser(AuditTrail auditTrail)
         {
@@ -46,31 +49,32 @@ namespace Fussball.SimplePointsSystem
             return _result;
         }
 
-        private void AddPointsWonAndLost(AuditTrailItem matchItem, 
-            string winnerName, 
-            string looserName)
+        
+        private void AddPointsWonAndLost(AuditTrailItem matchItem, string winnerName, string looserName)
         {
-            string winnerWhatPrefix = string.Format(PLAYERS_SCORE_CHANGED_TO_FORMATSTRING, winnerName);
-            string looserWhatPrefix = string.Format(PLAYERS_SCORE_CHANGED_TO_FORMATSTRING, looserName);
+            _winnerWhatPrefix = string.Format(PLAYERS_SCORE_CHANGED_TO_FORMATSTRING, winnerName);
+            _looserWhatPrefix = string.Format(PLAYERS_SCORE_CHANGED_TO_FORMATSTRING, looserName);
 
             foreach (AuditTrailItem item in _AuditTrail.Items)
             {
-                if(matchItem.IsRegisteredAtTheSameTimeAs(item))
+                if (matchItem.IsRegisteredAtTheSameTimeAs(item) && AreNotTheSame(matchItem, item))
                 {
-                    if (AreNotTheSame(matchItem, item))
-                    {
-                        int pointChange = GetPointsChange(item);
-                        
-                        if (item.What.StartsWith(winnerWhatPrefix))
-                        {
-                            AddPointsEarned(pointChange);
-                        }
-                        else if (item.What.StartsWith(looserWhatPrefix))
-                        {
-                            AddPointsLost(pointChange);
-                        }
-                    }
+                    AddPointsWonAndLostForItem(item);
                 }
+            }
+        }
+
+        private void AddPointsWonAndLostForItem(AuditTrailItem item)
+        {
+            int pointChange = GetPointsChange(item);
+
+            if (item.What.StartsWith(_winnerWhatPrefix))
+            {
+                AddPointsEarned(pointChange);
+            }
+            else if (item.What.StartsWith(_looserWhatPrefix))
+            {
+                AddPointsLost(pointChange);
             }
         }
 
