@@ -34,10 +34,7 @@ namespace Fussball.SimplePointsSystem
         {
             StringBuilder xml = new StringBuilder("<audittrail>");
 
-            foreach (AuditTrailItem item in auditTrail.Items)
-            {
-                AddItemToXml(item, xml);
-            }
+            auditTrail.Items.ForEach(item => AddItemToXml(item, xml));
 
             xml.Append("</audittrail>");
             return xml.ToString();
