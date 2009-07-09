@@ -5,15 +5,12 @@ namespace Fussball.SimplePointsSystem
     internal static class GameCalculator
     {
         public static int GetTeamPoints(Player player1, Player player2)
-        {            
+        {
             if (player1.Points > player2.Points)
             {
                 return player1.Points + GetTeamLowerPlayerPart(player2);
             }
-            else
-            {
-                return player2.Points + GetTeamLowerPlayerPart(player1);
-            }
+            return player2.Points + GetTeamLowerPlayerPart(player1);
         }
 
         private static int GetTeamLowerPlayerPart(Player player)
@@ -29,16 +26,13 @@ namespace Fussball.SimplePointsSystem
         internal static CalculationResult GetGameResult(int winnerPoints, int looserPoints)
         {
             int difference = Math.Abs(winnerPoints - looserPoints);
-            if (winnerPoints >= looserPoints) 
+            if (winnerPoints >= looserPoints)
             {
                 if (difference > 100)
                 {
                     return CalculationResult.HighestScoreWonWithBigDifference;
                 }
-                else
-                {
-                    return CalculationResult.HighestScoreWonWithSmallDifference;
-                }
+                return CalculationResult.HighestScoreWonWithSmallDifference;
             }
             else //if (winnerPoints < looserPoints)
             {
@@ -46,10 +40,7 @@ namespace Fussball.SimplePointsSystem
                 {
                     return CalculationResult.LowestScoreWonWithBigDifference;
                 }
-                else
-                {
-                    return CalculationResult.LowestScoreWinWithSmallDifference;
-                }
+                return CalculationResult.LowestScoreWinWithSmallDifference;
             }
         }
     }
