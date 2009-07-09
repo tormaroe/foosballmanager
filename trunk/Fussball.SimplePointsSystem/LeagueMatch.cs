@@ -35,7 +35,7 @@ namespace Fussball.SimplePointsSystem
             lm.PlayerName1 = node.SelectSingleNode(PLAYER1_ELEMENT).InnerText;
             lm.PlayerName2 = node.SelectSingleNode(PLAYER2_ELEMENT).InnerText;
             if(node.SelectSingleNode(WHEN_ELEMENT).InnerText != string.Empty)
-                lm.PlayedWhen = Common.GetDateFromUnixTime(Convert.ToDouble(node.SelectSingleNode(WHEN_ELEMENT).InnerText));
+                lm.PlayedWhen = UnixTime.GetDateFromUnixTime(Convert.ToDouble(node.SelectSingleNode(WHEN_ELEMENT).InnerText));
             lm.Winner = node.SelectSingleNode(WINNER_ELEMENT).InnerText;
 
             return lm;
@@ -44,11 +44,11 @@ namespace Fussball.SimplePointsSystem
         public string ToXml()
         {
             return "<leagueMatch>"
-                + Common.CreateElement(ID_ELEMENT, Id.ToString())
-                + Common.CreateElement(PLAYER1_ELEMENT, PlayerName1)
-                + Common.CreateElement(PLAYER2_ELEMENT, PlayerName2)
-                + Common.CreateElement(WHEN_ELEMENT, (PlayedWhen.HasValue ? Common.GetUnixTime(PlayedWhen.Value).ToString() : string.Empty))
-                + Common.CreateElement(WINNER_ELEMENT, Winner)
+                + CommonXml.CreateElement(ID_ELEMENT, Id.ToString())
+                + CommonXml.CreateElement(PLAYER1_ELEMENT, PlayerName1)
+                + CommonXml.CreateElement(PLAYER2_ELEMENT, PlayerName2)
+                + CommonXml.CreateElement(WHEN_ELEMENT, (PlayedWhen.HasValue ? UnixTime.GetUnixTime(PlayedWhen.Value).ToString() : string.Empty))
+                + CommonXml.CreateElement(WINNER_ELEMENT, Winner)
                 + "</leagueMatch>";
         }
 

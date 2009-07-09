@@ -24,7 +24,7 @@ namespace Fussball.SimplePointsSystem
         {
             return new AuditTrailItem()
             {
-                When = Common.GetDateFromUnixTime(Convert.ToDouble(node.SelectSingleNode("when").InnerText)),
+                When = UnixTime.GetDateFromUnixTime(Convert.ToDouble(node.SelectSingleNode("when").InnerText)),
                 What = node.SelectSingleNode("what").InnerText,
                 CssAttributes = node.SelectSingleNode("css").InnerText
             };
@@ -46,7 +46,7 @@ namespace Fussball.SimplePointsSystem
         private static void AddItemToXml(AuditTrailItem item, StringBuilder xml)
         {
             xml.AppendFormat("<item><when>{0}</when><what>{1}</what><css>{2}</css></item>",
-                                Common.GetUnixTime(item.When),
+                                UnixTime.GetUnixTime(item.When),
                                 item.What,
                                 item.CssAttributes);
         }
