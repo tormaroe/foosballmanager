@@ -2,7 +2,7 @@ using System;
 
 namespace Fussball.SimplePointsSystem
 {
-    public static class GameCalculator
+    internal static class GameCalculator
     {
         public static int GetTeamPoints(Player player1, Player player2)
         {            
