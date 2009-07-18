@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Fussball.SimplePointsSystem
 {
@@ -31,25 +29,32 @@ namespace Fussball.SimplePointsSystem
         public int GenerateMatches(int leagueSize)
         {
             Matches = new LeagueMatches();
-            int generatedMatches = 0;
-            
 
             foreach (Player p1 in Players.AllPlayers)
             {
                 foreach (Player p2 in Players.AllPlayers)
                 {
-                    if (p2.Name != p1.Name)
+                    if (is_different_players(p1, p2))
                     {
-                        for (int i = 0; i < leagueSize; i++)
-                        {
-                            LeagueMatch m = new LeagueMatch(p1.Name, p2.Name);
-                            Matches.Add(m);
-                            generatedMatches++;
-                        }
+                        GenerateMatchesForPlayers(leagueSize, p1, p2);
                     }
                 }
             }
-            return generatedMatches;
+            return Matches.AllMatches.Count;
+        }
+
+        private static bool is_different_players(Player p1, Player p2)
+        {
+            return p2.Name != p1.Name;
+        }
+
+        private void GenerateMatchesForPlayers(int numberToGenerat, Player p1, Player p2)
+        {
+            for (int i = 0; i < numberToGenerat; i++)
+            {
+                LeagueMatch m = new LeagueMatch(p1.Name, p2.Name);
+                Matches.Add(m);
+            }
         }
 
         public bool TryAddMatchResult(Player winner, Player looser)
