@@ -56,6 +56,7 @@
     <Compile Include="Common\FluentAsserts.cs" />
     <Compile Include="DoublesGameResultSpecification.cs" />
     <Compile Include="GameResultSpecificationsContext.cs" />
+    <Compile Include="MatchAnalyserSpecification.cs" />
     <Compile Include="SinglesGameResultSpecifications.cs" />
     <Compile Include="PlayersCollectionTests.cs" />
     <Compile Include="PlayersFromXML.cs" />
