@@ -56,7 +56,9 @@
     <Compile Include="Common\FluentAsserts.cs" />
     <Compile Include="DoublesGameResultSpecification.cs" />
     <Compile Include="GameResultSpecificationsContext.cs" />
+    <Compile Include="LeagueContext.cs" />
     <Compile Include="LeagueGenerationSpecification.cs" />
+    <Compile Include="LeagueOperationsTests.cs" />
     <Compile Include="MatchAnalyserSpecification.cs" />
     <Compile Include="PlayerAnalyzerSpecification.cs" />
     <Compile Include="SinglesGameResultSpecifications.cs" />
