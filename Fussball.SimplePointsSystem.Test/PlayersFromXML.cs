@@ -56,7 +56,7 @@ namespace Fussball.SimplePointsSystem.Test
 
         Action MrT_should_have_all_the_correct_values = () =>
         {
-            var mrT = Find_player_with_name("Mr. T");
+            var mrT = players.GetByName("Mr. T");
             mrT.SinglesLost.should_be(1);
             mrT.SinglesWon.should_be(2);
             mrT.DoublesLost.should_be(3);
@@ -65,10 +65,6 @@ namespace Fussball.SimplePointsSystem.Test
             mrT.LeaguePoints.should_be(5);
             mrT.LeagueMatchesPlayed.should_be(10);
         };
-
-        static Func<string, Player> Find_player_with_name = (name) =>
-            players.AllPlayers.Find(player => 
-                player.Name.Equals(name));
 
         static string xml;
         static Players players;
