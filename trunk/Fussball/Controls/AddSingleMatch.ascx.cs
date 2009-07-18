@@ -67,14 +67,7 @@ namespace Fussball.Controls
                 "green");
 
             if (_leagueMatch.Checked && Fussball.SimplePointsSystem.League.Instance.TryAddMatchResult(winner, looser))
-            {
-                Player leaguePlayerWinner = Fussball.SimplePointsSystem.League.Instance.Players[winner.Id];
-                leaguePlayerWinner.LeaguePoints = leaguePlayerWinner.LeaguePoints + 1;
-                leaguePlayerWinner.LeagueMatchesPlayed = leaguePlayerWinner.LeagueMatchesPlayed + 1;
-
-                Player leaguePlayerLooser = Fussball.SimplePointsSystem.League.Instance.Players[looser.Id];
-                leaguePlayerLooser.LeagueMatchesPlayed = leaguePlayerLooser.LeagueMatchesPlayed + 1;
-
+            {                
                 if (LeagueMatchAdded != null)
                 {
                     LeagueMatchAdded(this, e);

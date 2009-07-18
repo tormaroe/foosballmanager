@@ -67,6 +67,9 @@ namespace Fussball.SimplePointsSystem
                 if (match.IsNotPlayedYet && match.IsMatchBetween(winner, looser))
                 {
                     match.SetResult(winner);
+                    winner.LeaguePoints++;
+                    winner.LeagueMatchesPlayed++;
+                    looser.LeagueMatchesPlayed++;
                     return true;
                 }
             }
