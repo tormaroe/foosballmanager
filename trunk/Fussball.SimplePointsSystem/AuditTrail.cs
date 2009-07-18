@@ -8,15 +8,26 @@ namespace Fussball.SimplePointsSystem
 {
     public class AuditTrail
     {
+        /// <summary>
+        /// The non http context instance is needed for testing
+        /// </summary>
+        private static AuditTrail _nonHttpContextInstance;
+
         public static AuditTrail Instance
         {
             get
-            {                
-                return System.Web.HttpContext.Current.Application["AuditTrail"] as AuditTrail;
+            {
+                if (System.Web.HttpContext.Current != null)
+                    return System.Web.HttpContext.Current.Application["AuditTrail"] as AuditTrail;
+                else
+                    return _nonHttpContextInstance;
             }
             set
             {
-                System.Web.HttpContext.Current.Application["AuditTrail"] = value;
+                if (System.Web.HttpContext.Current != null)
+                    System.Web.HttpContext.Current.Application["AuditTrail"] = value;
+                else
+                    _nonHttpContextInstance = value;
             }
         }
 
