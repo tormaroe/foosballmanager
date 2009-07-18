@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FluentAsserts.cs" />
+    <Compile Include="PlayersFromXML.cs" />
     <Compile Include="PlayersToXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
