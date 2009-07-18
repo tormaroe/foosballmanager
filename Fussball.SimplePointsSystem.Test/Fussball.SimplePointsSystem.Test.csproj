@@ -53,10 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FluentAsserts.cs" />
+    <Compile Include="Common\FluentAsserts.cs" />
     <Compile Include="PlayersFromXML.cs" />
     <Compile Include="PlayersToXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnixTimeParsing.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fussball.SimplePointsSystem\Fussball.SimplePointsSystem.csproj">
