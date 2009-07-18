@@ -34,7 +34,6 @@ namespace Fussball.SimplePointsSystem.Test
         }
 
         [Test]
-        [Ignore("It actually didn't work like that. League has bad cohesion, should be mended.")]
         public void Should_get_league_points_and_league_match_count()
         {
             Given_the_number_of_players_is(2);
@@ -43,6 +42,7 @@ namespace Fussball.SimplePointsSystem.Test
             league.TryAddMatchResult(get_player(2), get_player(1));
 
             get_player(1).LeagueMatchesPlayed.should_be(2);
+            get_player(1).LeaguePoints.should_be(1);
         }
     }
 }
