@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\FluentAsserts.cs" />
+    <Compile Include="SinglesGameResultSpecifications.cs" />
     <Compile Include="PlayersCollectionTests.cs" />
     <Compile Include="PlayersFromXML.cs" />
     <Compile Include="PlayersToXML.cs" />
