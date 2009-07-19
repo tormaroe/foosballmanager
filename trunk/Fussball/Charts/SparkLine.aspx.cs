@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace Fussball.Charts
 {
-    public partial class SparkLine : System.Web.UI.Page
+    public partial class SparkLine : Page
     {
-                private SparkLineData _dataContainer;
+        private SparkLineData _dataContainer;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,7 +15,6 @@ namespace Fussball.Charts
 
             if (_dataContainer == null)
                 return;
-
 
             _dataContainer.SetAvg();
 

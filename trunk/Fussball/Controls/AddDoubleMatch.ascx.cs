@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Fussball.SimplePointsSystem;
 
 namespace Fussball.Controls
 {
-    public partial class AddDoubleMatch : System.Web.UI.UserControl
+    public partial class AddDoubleMatch : UserControl
     {
         public delegate void DoubleMatchAddedHandler(object sender, EventArgs e);
 
@@ -75,17 +68,12 @@ namespace Fussball.Controls
 
         private bool AnyonePickedMoreThanOnce(Guid winner1Id, Guid winner2Id, Guid looser1Id, Guid looser2Id)
         {
-            if (
-                winner1Id.Equals(winner2Id) ||
-                winner1Id.Equals(looser1Id) ||
-                winner1Id.Equals(looser2Id) ||
-                winner2Id.Equals(looser1Id) ||
-                winner2Id.Equals(looser2Id) ||
-                looser1Id.Equals(looser2Id)
-                )
-                return true;
-            else
-                return false;
+            return winner1Id.Equals(winner2Id) 
+                || winner1Id.Equals(looser1Id) 
+                || winner1Id.Equals(looser2Id) 
+                || winner2Id.Equals(looser1Id) 
+                || winner2Id.Equals(looser2Id) 
+                || looser1Id.Equals(looser2Id);
         }
 
         private void ShowMessage(string text, string color)
