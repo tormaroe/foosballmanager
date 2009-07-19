@@ -18,19 +18,24 @@ namespace Fussball.SimplePointsSystem
             _playerScoreChangedText = string.Format("{0}'s score changed to ", playerName);
 
             _result = new AnalysePlayerResult();
-            _result.Points.Add(Player.DEFAULT_PLAYER_POINTS);
-
-            foreach (AuditTrailItem item in _auditTrail.Items)
-            {
-                if (item.What.StartsWith(_playerScoreChangedText))
-                {
-                    _result.Points.Add(GetPointsChange(item));
-                }
-            }
+            AddStartingPoints();
+            AddPointChangesFromAuditTrail();
 
             return _result;
         }
 
+        private void AddStartingPoints()
+        {
+            _result.Points.Add(Player.DEFAULT_PLAYER_POINTS);
+        }
+        private void AddPointChangesFromAuditTrail()
+        {
+            _auditTrail.Items.ForEach(item =>
+                        {
+                            if (item.What.StartsWith(_playerScoreChangedText))
+                                _result.Points.Add(GetPointsChange(item));
+                        });
+        }
         private int GetPointsChange(AuditTrailItem item)
         {
             string sPoints = item.What.Substring(_playerScoreChangedText.Length);
