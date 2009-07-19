@@ -1,36 +1,22 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using Fussball.SimplePointsSystem;
 
 namespace Fussball.Controls
 {
-    public partial class LeagueSettings : System.Web.UI.UserControl
+    public partial class LeagueSettings : UserControl
     {
+        private const int MINIMUM_LEAGUE_SIZE = 1;
+        private const int MAXIMUM_LEAGUE_SIZE = 10;
+
         public delegate void LeagueSettingsDoneHandler(object sender, EventArgs e);
 
         public event LeagueSettingsDoneHandler LeagueSettingsDone;
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
         protected void _addPlayer_Click(object sender, EventArgs e)
         {
-            //if (League.Instance == null)
-            //{
-            //    PlayersUtil.LoadLeague();
-            //}
-
-            Fussball.SimplePointsSystem.League.Instance.Players.Add(PlayersUtil.ThePlayers[new Guid(_playerToAdd.SelectedValue)]);
+            Fussball.SimplePointsSystem.League.Instance.Players.Add(
+                PlayersUtil.ThePlayers[new Guid(_playerToAdd.SelectedValue)]);
             PlayersUtil.SaveLeague();
             BindPlayersGrid();
         }
@@ -38,20 +24,26 @@ namespace Fussball.Controls
         protected void _btnGenerateMatches_Click(object sender, EventArgs e)
         {
             int leagueSize;
-            if (Int32.TryParse(_leagueSize.Text, out leagueSize)
-                && leagueSize > 0
-                && leagueSize <= 10)
+            if (Get_league_size_and_check_that_it_is_valid(out leagueSize))
             {
-                int matchesGenerated = Fussball.SimplePointsSystem.League.Instance.GenerateMatches(leagueSize);
-                Fussball.SimplePointsSystem.League.Instance.ResetPlayerPoints();
+                int matchesGenerated = Fussball.SimplePointsSystem.League.Instance.GenerateMatches(leagueSize);                
                 PlayersUtil.SaveLeague();
 
                 _generateMessage.Text = string.Format("{0} games generated!", matchesGenerated);
             }
             else
             {
-                _generateMessage.Text = "League size not a valid number. Valid range: 1 to 10.";
+                _generateMessage.Text = String.Format("League size not a valid number. Valid range: {0} to {1}.",
+                    MINIMUM_LEAGUE_SIZE,
+                    MAXIMUM_LEAGUE_SIZE);
             }
+        }
+
+        private bool Get_league_size_and_check_that_it_is_valid(out int leagueSize)
+        {
+            return Int32.TryParse(_leagueSize.Text, out leagueSize)
+                            && leagueSize >= MINIMUM_LEAGUE_SIZE
+                            && leagueSize <= MAXIMUM_LEAGUE_SIZE;
         }
 
         protected void _playersGrid_Command(object sender, DataGridCommandEventArgs e)
@@ -87,11 +79,11 @@ namespace Fussball.Controls
 
         private void BindPlayersGrid()
         {
-            if (Fussball.SimplePointsSystem.League.Instance != null)
-            {
-                _playersGrid.DataSource = Fussball.SimplePointsSystem.League.Instance.Players.AllPlayers;
-                _playersGrid.DataBind();
-            }
+            if (Fussball.SimplePointsSystem.League.Instance == null)
+                return;
+
+            _playersGrid.DataSource = Fussball.SimplePointsSystem.League.Instance.Players.AllPlayers;
+            _playersGrid.DataBind();
         }
 
         public void Hide()

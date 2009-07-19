@@ -1,24 +1,12 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Fussball.SimplePointsSystem;
 
 namespace Fussball.Controls
 {
-    public partial class Stats : System.Web.UI.UserControl
+    public partial class Stats : UserControl
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
         public void Hide()
         {
             Visible = false;
@@ -28,22 +16,29 @@ namespace Fussball.Controls
         {
             Visible = true;
 
-            if (!_player1.Items.Count.Equals(PlayersUtil.ThePlayers.AllPlayers.Count))
-            {
-                _player1.DataSource = PlayersUtil.ThePlayers.AllPlayers;
-                _player1.DataTextField = "Name";
-                _player1.DataValueField = "Id";
-                _player1.DataBind();
+            if (PlayersAlreadyBound)
+                return;
 
-                _player2.DataSource = PlayersUtil.ThePlayers.AllPlayers;
-                _player2.DataTextField = "Name";
-                _player2.DataValueField = "Id";
-                _player2.DataBind();
+            _player1.DataSource = PlayersUtil.ThePlayers.AllPlayers;
+            _player1.DataTextField = "Name";
+            _player1.DataValueField = "Id";
+            _player1.DataBind();
 
-                _messagePanel.Visible = false;
-            }
+            _player2.DataSource = PlayersUtil.ThePlayers.AllPlayers;
+            _player2.DataTextField = "Name";
+            _player2.DataValueField = "Id";
+            _player2.DataBind();
+
+            _messagePanel.Visible = false;
         }
 
+        private bool PlayersAlreadyBound
+        {
+            get
+            {
+                return _player1.Items.Count.Equals(PlayersUtil.ThePlayers.AllPlayers.Count);
+            }
+        }
         protected void _btnAnalyse_Click(object sender, EventArgs e)
         {
             _messagePanel.Visible = false;
@@ -53,13 +48,15 @@ namespace Fussball.Controls
 
             if (player1Id.Equals(player2Id))
             {
-                ShowMessage("Can't analyse matches if you pick the same player twice!", "red");
+                ShowMessage("Can't analyze matches if you pick the same player twice!", "red");
                 return;
             }
 
-            AnalyseResult result = Fussball.SimplePointsSystem.AuditTrail.Instance.AnalyseMatches(_player1.SelectedItem.Text, _player2.SelectedItem.Text);
+            AnalyseResult result = Fussball.SimplePointsSystem.AuditTrail.Instance.AnalyseMatches(
+                _player1.SelectedItem.Text, 
+                _player2.SelectedItem.Text);
 
-            string message = "";
+            string message = string.Empty;
 
             message += string.Format("{0} won {1} matches, {2} won {3} matches.",
                 _player1.SelectedItem.Text,

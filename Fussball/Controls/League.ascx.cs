@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Fussball.SimplePointsSystem;
 using System.Collections.Generic;
 
 namespace Fussball.Controls
 {
-    public partial class League : System.Web.UI.UserControl
+    public partial class League : UserControl
     {
         public delegate void LeagueMatchRemovedHandler(object sender, EventArgs e);
 
@@ -21,7 +14,7 @@ namespace Fussball.Controls
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _settings.LeagueSettingsDone += new LeagueSettings.LeagueSettingsDoneHandler(_settings_LeagueSettingsDone);
+            _settings.LeagueSettingsDone += _settings_LeagueSettingsDone;
         }
 
         void _settings_LeagueSettingsDone(object sender, EventArgs e)

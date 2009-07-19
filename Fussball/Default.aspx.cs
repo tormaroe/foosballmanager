@@ -1,33 +1,18 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using Fussball.Controls;
 
 namespace Fussball
 {
-    public partial class _Default : System.Web.UI.Page
+    public partial class _Default : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Fussball.SimplePointsSystem.AuditTrail.Instance == null)
-            //    throw new Exception("AuditTrail.Instance == null");
-            //    PlayersUtil.LoadAuditTrail();
-
-            //if (Fussball.SimplePointsSystem.League.Instance == null)
-            //    PlayersUtil.LoadLeague();
-
-            _addUserForm.UserAdded += new AddUser.UserAddedHandler(_addUserForm_UserAdded);
-            _addSingleMatchForm.SingleMatchAdded += new AddSingleMatch.SingleMatchAddedHandler(_addSingleMatchForm_MatchAdded);
-            _addDoubleMatchForm.DoubleMatchAdded += new AddDoubleMatch.DoubleMatchAddedHandler(_addDoubleMatchForm_DoubleMatchAdded);
-            _addSingleMatchForm.LeagueMatchAdded += new AddSingleMatch.LeagueMatchAddedHandler(_addSingleMatchForm_LeagueMatchAdded);
-            _adjustPlayer.UserAdjusted += new AdjustPlayer.UserAdjustedHandler(_adjustPlayer_UserAdjusted);
-            _league.LeagueMatchRemoved += new League.LeagueMatchRemovedHandler(_league_LeagueMatchRemoved);
+            _addUserForm.UserAdded += _addUserForm_UserAdded;
+            _addSingleMatchForm.SingleMatchAdded += _addSingleMatchForm_MatchAdded;
+            _addDoubleMatchForm.DoubleMatchAdded += _addDoubleMatchForm_DoubleMatchAdded;
+            _addSingleMatchForm.LeagueMatchAdded += _addSingleMatchForm_LeagueMatchAdded;
+            _adjustPlayer.UserAdjusted += _adjustPlayer_UserAdjusted;
+            _league.LeagueMatchRemoved += _league_LeagueMatchRemoved;
         }
 
         void _league_LeagueMatchRemoved(object sender, EventArgs e)

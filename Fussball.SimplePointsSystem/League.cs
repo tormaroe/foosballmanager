@@ -40,6 +40,9 @@ namespace Fussball.SimplePointsSystem
                     }
                 }
             }
+
+            ResetPlayerPoints();
+
             return Matches.AllMatches.Count;
         }
 
@@ -76,7 +79,7 @@ namespace Fussball.SimplePointsSystem
             return false;
         }
 
-        public void ResetPlayerPoints()
+        private void ResetPlayerPoints()
         {
             foreach (Player p in Players.AllPlayers)
             {
