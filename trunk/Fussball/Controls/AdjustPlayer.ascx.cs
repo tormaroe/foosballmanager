@@ -1,28 +1,20 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Fussball.SimplePointsSystem;
 
 namespace Fussball.Controls
 {
-    public partial class AdjustPlayer : System.Web.UI.UserControl
+    public partial class AdjustPlayer : UserControl
     {
+        private int _newDoublesLost;
+        private int _newDoublesWon;
+        private int _newPoints;
+        private int _newSinglesLost;
+        private int _newSinglesWon;
+
         public delegate void UserAdjustedHandler(object sender, EventArgs e);
 
         public event UserAdjustedHandler UserAdjusted;
-
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
 
         public void Show()
         {
@@ -42,7 +34,7 @@ namespace Fussball.Controls
 
         protected void _btnSelectPlayer_Click(object sender, EventArgs e)
         {
-            Player p = PlayersUtil.ThePlayers[new Guid(_player.SelectedValue)];
+            Player p = GetPlayerFromIdString(_player.SelectedValue);
 
             _id.Value = p.Id.ToString();
             _name.Text = p.Name;
@@ -60,39 +52,17 @@ namespace Fussball.Controls
             _editPanel.Visible = true;
         }
 
+        private Player GetPlayerFromIdString(string id)
+        {
+            return PlayersUtil.ThePlayers[new Guid(id)];
+        }
+
         protected void _update_Click(object sender, EventArgs e)
         {
-            int newSinglesWon, newSinglesLost, newDoublesWon, newDoublesLost, newPoints;
-            if (
-                Int32.TryParse(_singlesWonNew.Text, out newSinglesWon) &&
-                Int32.TryParse(_singlesLostNew.Text, out newSinglesLost) &&
-                Int32.TryParse(_doublesWonNew.Text, out newDoublesWon) &&
-                Int32.TryParse(_doublesLostNew.Text, out newDoublesLost) &&
-                Int32.TryParse(_pointsNew.Text, out newPoints)
-                )
+            if (Parse_all_new_values_AND_they_are_all_valid())
             {
-                Player p = PlayersUtil.ThePlayers[new Guid(_id.Value)];
-                p.SinglesWon = newSinglesWon;
-                p.SinglesLost = newSinglesLost;
-                p.DoublesWon = newDoublesWon;
-                p.DoublesLost = newDoublesLost;
-                p.Points = newPoints;
-
-                Fussball.SimplePointsSystem.AuditTrail.Instance.AddManualAudit(string.Format(
-                    "Manual adjustment of player {0}: SW: {1}->{2}, SL: {3}->{4}, DW: {5}->{6}, DL: {7}->{8}, Points: {9}->{10}",
-                    _name.Text,
-                    _singlesWonOriginal.Text,
-                    newSinglesWon,
-                    _singlesLostOriginal.Text,
-                    newSinglesLost,
-                    _doublesWonOriginal.Text,
-                    newDoublesWon,
-                    _doublesLostOriginal.Text,
-                    newDoublesLost,
-                    _pointsOriginal.Text,
-                    newPoints
-                    ));
-
+                UpdatePlayerWithNewValues();
+                AddAuditTrailForAdjustment();
 
                 if (UserAdjusted != null)
                 {
@@ -103,6 +73,43 @@ namespace Fussball.Controls
             {
                 throw new Exception("One of the new values can't be converted to a number");
             }
+        }
+
+        private bool Parse_all_new_values_AND_they_are_all_valid()
+        {
+            return Int32.TryParse(_singlesWonNew.Text, out _newSinglesWon) &&
+                            Int32.TryParse(_singlesLostNew.Text, out _newSinglesLost) &&
+                            Int32.TryParse(_doublesWonNew.Text, out _newDoublesWon) &&
+                            Int32.TryParse(_doublesLostNew.Text, out _newDoublesLost) &&
+                            Int32.TryParse(_pointsNew.Text, out _newPoints);
+        }
+
+        private void UpdatePlayerWithNewValues()
+        {
+            Player p = GetPlayerFromIdString(_id.Value);
+            p.SinglesWon = _newSinglesWon;
+            p.SinglesLost = _newSinglesLost;
+            p.DoublesWon = _newDoublesWon;
+            p.DoublesLost = _newDoublesLost;
+            p.Points = _newPoints;
+        }
+
+        private void AddAuditTrailForAdjustment()
+        {
+            Fussball.SimplePointsSystem.AuditTrail.Instance.AddManualAudit(string.Format(
+                                "Manual adjustment of player {0}: SW: {1}->{2}, SL: {3}->{4}, DW: {5}->{6}, DL: {7}->{8}, Points: {9}->{10}",
+                                _name.Text,
+                                _singlesWonOriginal.Text,
+                                _newSinglesWon,
+                                _singlesLostOriginal.Text,
+                                _newSinglesLost,
+                                _doublesWonOriginal.Text,
+                                _newDoublesWon,
+                                _doublesLostOriginal.Text,
+                                _newDoublesLost,
+                                _pointsOriginal.Text,
+                                _newPoints
+                                ));
         }
     }
 }
