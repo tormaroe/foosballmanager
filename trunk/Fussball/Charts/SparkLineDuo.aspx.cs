@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace Fussball.Charts
 {
-    public partial class SparkLineDuo : System.Web.UI.Page
+    public partial class SparkLineDuo : Page
     {
         
         private SparkLineDuoData _dataContainer;
@@ -43,14 +35,10 @@ namespace Fussball.Charts
                 graphics.DrawLines(penSet1, pointsSet1);
                 graphics.DrawLines(penSet2, pointsSet2);
 
-                DrawFinalPoint(pointsSet1, graphics, _dataContainer.Set1Text);
-                DrawFinalPoint(pointsSet2, graphics, _dataContainer.Set2Text);
+                pointsSet1.DrawFinalPoint(graphics, _dataContainer.Set1Text);
+                pointsSet2.DrawFinalPoint(graphics, _dataContainer.Set2Text);
 
-            }
-            else
-            {
-
-            }
+            }            
 
             Response.ContentType = "image/jpeg";
             bitmap.Save(Response.OutputStream, ImageFormat.Jpeg);
@@ -59,19 +47,7 @@ namespace Fussball.Charts
             Session[Request["data"]] = null;
         }
 
-        private void DrawFinalPoint(Point[] points, Graphics graphics, string text)
-        {
-            //final point
-            Point lastPoint = points[points.Length - 1];
-            Brush finalBrush = new SolidBrush(Color.Red);
-            graphics.FillPie(finalBrush, lastPoint.X - 2, lastPoint.Y - 2, 4, 4, 0, 360);
-
-            //final value
-            string lastValue = text;
-            Font drawFont = new Font("Arial", 8);
-            Brush drawBrush = new SolidBrush(Color.Black);
-            graphics.DrawString(lastValue, drawFont, drawBrush, lastPoint.X + 2, lastPoint.Y - 6);
-        }
+        
     }
 }
 
