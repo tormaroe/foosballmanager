@@ -92,16 +92,7 @@ namespace Fussball.Controls
             SparkLineData result1 = GenerateChart(player1Id, _chartPlayer1);
             SparkLineData result2 = GenerateChart(player2Id, _chartPlayer2);
 
-            SparkLineDuoData duoData = new SparkLineDuoData();
-            duoData.DataSet1 = result1.Data;
-            duoData.DataSet2 = result2.Data;
-            duoData.ImageWidth = 500;
-            duoData.ImageHeight = 200;
-            duoData.Set1Text = _player1.SelectedItem.Text;
-            duoData.Set2Text = _player2.SelectedItem.Text;
-            string duoChartKey = Guid.NewGuid().ToString();
-            Session[duoChartKey] = duoData;
-            _chartCombined.ImageUrl = ResolveUrl("~/Charts/SparkLineDuo.aspx") + "?data=" + duoChartKey;
+            GenerateCombinedChart(result1, result2);
 
             _maxRatingPlayer1.Text = result1.Max.ToString();
             _maxRatingPlayer2.Text = result2.Max.ToString();
@@ -135,5 +126,18 @@ namespace Fussball.Controls
             return spd;
         }
 
+        private void GenerateCombinedChart(SparkLineData player1data, SparkLineData player2data)
+        {
+            SparkLineDuoData duoData = new SparkLineDuoData();
+            duoData.DataSet1 = player1data.Data;
+            duoData.DataSet2 = player2data.Data;
+            duoData.ImageWidth = 500;
+            duoData.ImageHeight = 200;
+            duoData.Set1Text = _player1.SelectedItem.Text;
+            duoData.Set2Text = _player2.SelectedItem.Text;
+            string duoChartKey = Guid.NewGuid().ToString();
+            Session[duoChartKey] = duoData;
+            _chartCombined.ImageUrl = ResolveUrl("~/Charts/SparkLineDuo.aspx") + "?data=" + duoChartKey;
+        }
     }
 }

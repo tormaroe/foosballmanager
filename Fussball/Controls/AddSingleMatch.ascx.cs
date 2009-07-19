@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using Fussball.SimplePointsSystem;
 
 namespace Fussball.Controls
 {
-    public partial class AddSingleMatch : System.Web.UI.UserControl
+    public partial class AddSingleMatch : UserControl
     {
         public delegate void SingleMatchAddedHandler(object sender, EventArgs e);
         public delegate void LeagueMatchAddedHandler(object sender, EventArgs e);
