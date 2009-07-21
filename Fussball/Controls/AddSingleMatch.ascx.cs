@@ -55,23 +55,27 @@ namespace Fussball.Controls
                 winner.Points),
                 "green");
 
+            HandleLeagueMatchAdding(winner, looser);
+        }
+
+        private void HandleLeagueMatchAdding(Player winner, Player looser)
+        {
             if (_leagueMatch.Checked && Fussball.SimplePointsSystem.League.Instance.TryAddMatchResult(winner, looser))
-            {                
+            {
                 if (LeagueMatchAdded != null)
                 {
-                    LeagueMatchAdded(this, e);
+                    LeagueMatchAdded(this, EventArgs.Empty);
                 }
             }
             else
             {
                 if (SingleMatchAdded != null)
                 {
-                    SingleMatchAdded(this, e);
+                    SingleMatchAdded(this, EventArgs.Empty);
                 }
             }
             _leagueMatch.Checked = false;
         }
-
         private void ShowMessage(string text, string color)
         {
             _messagePanel.Visible = true;
