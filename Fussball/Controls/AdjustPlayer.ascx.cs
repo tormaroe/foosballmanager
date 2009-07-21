@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Web.UI;
-using Fussball.SimplePointsSystem;
+using SPS = Fussball.SimplePointsSystem;
 
 namespace Fussball.Controls
 {
-    public partial class AdjustPlayer : UserControl
+    public partial class AdjustPlayer : UserControl, IAdjustPlayerView
     {
-        private int _newDoublesLost;
-        private int _newDoublesWon;
-        private int _newPoints;
-        private int _newSinglesLost;
-        private int _newSinglesWon;
+        private AdjustPlayerController _controller;
 
         public event EventHandler<EventArgs> UserAdjusted;
+
+        public AdjustPlayer()
+        {
+            _controller = new AdjustPlayerController(
+                this, 
+                PlayersUtil.ThePlayers, 
+                SPS.AuditTrail.Instance);
+        }
 
         public void Show()
         {
@@ -32,82 +36,123 @@ namespace Fussball.Controls
 
         protected void _btnSelectPlayer_Click(object sender, EventArgs e)
         {
-            Player p = GetPlayerFromIdString(_player.SelectedValue);
+            _id.Value = _player.SelectedValue;
 
-            _id.Value = p.Id.ToString();
-            _name.Text = p.Name;
-            _singlesWonOriginal.Text = p.SinglesWon.ToString();
-            _singlesLostOriginal.Text = p.SinglesLost.ToString();
-            _doublesWonOriginal.Text = p.DoublesWon.ToString();
-            _doublesLostOriginal.Text = p.DoublesLost.ToString();
-            _pointsOriginal.Text = p.Points.ToString();
-            _singlesWonNew.Text = p.SinglesWon.ToString();
-            _singlesLostNew.Text = p.SinglesLost.ToString();
-            _doublesWonNew.Text = p.DoublesWon.ToString();
-            _doublesLostNew.Text = p.DoublesLost.ToString();
-            _pointsNew.Text = p.Points.ToString();
-
-            _editPanel.Visible = true;
+            if (PlayerSelectedForAdjustments != null)
+                PlayerSelectedForAdjustments(this, GetPlayerEventArgs());
         }
 
-        private Player GetPlayerFromIdString(string id)
+        private PlayerEventArgs GetPlayerEventArgs()
         {
-            return PlayersUtil.ThePlayers[new Guid(id)];
+            return new PlayerEventArgs(new Guid(_id.Value));
         }
 
         protected void _update_Click(object sender, EventArgs e)
         {
-            if (Parse_all_new_values_AND_they_are_all_valid())
+            if (AdjustPlayerRequest != null)
+                AdjustPlayerRequest(this, GetPlayerEventArgs());
+
+            if (UserAdjusted != null)
+                UserAdjusted(this, e);
+        }
+
+        #region IAdjustPlayerView Members
+
+        public event EventHandler<PlayerEventArgs> PlayerSelectedForAdjustments;
+        public event EventHandler<PlayerEventArgs> AdjustPlayerRequest;
+
+        public string PlayerName
+        {
+            get
             {
-                UpdatePlayerWithNewValues();
-                AddAuditTrailForAdjustment();
-
-                if (UserAdjusted != null)
-                {
-                    UserAdjusted(this, e);
-                }
+                return _name.Text;
             }
-            else
+            set
             {
-                throw new Exception("One of the new values can't be converted to a number");
+                _name.Text = value;
             }
         }
 
-        private bool Parse_all_new_values_AND_they_are_all_valid()
+        public int DoublesWon
         {
-            return Int32.TryParse(_singlesWonNew.Text, out _newSinglesWon) &&
-                            Int32.TryParse(_singlesLostNew.Text, out _newSinglesLost) &&
-                            Int32.TryParse(_doublesWonNew.Text, out _newDoublesWon) &&
-                            Int32.TryParse(_doublesLostNew.Text, out _newDoublesLost) &&
-                            Int32.TryParse(_pointsNew.Text, out _newPoints);
+            get
+            {
+                return Int32.Parse(_doublesWonNew.Text);
+            }
+            set
+            {
+                _doublesWonNew.Text = value.ToString();
+                _doublesWonOriginal.Text = value.ToString();
+            }
         }
 
-        private void UpdatePlayerWithNewValues()
+        public int DoublesLost
         {
-            Player p = GetPlayerFromIdString(_id.Value);
-            p.SinglesWon = _newSinglesWon;
-            p.SinglesLost = _newSinglesLost;
-            p.DoublesWon = _newDoublesWon;
-            p.DoublesLost = _newDoublesLost;
-            p.Points = _newPoints;
+            get
+            {
+                return Int32.Parse(_doublesLostNew.Text);
+            }
+            set
+            {
+                _doublesLostNew.Text = value.ToString();
+                _doublesLostOriginal.Text = value.ToString();
+            }
         }
 
-        private void AddAuditTrailForAdjustment()
+        public int SinglesWon
         {
-            Fussball.SimplePointsSystem.AuditTrail.Instance.AddManualAudit(string.Format(
-                                "Manual adjustment of player {0}: SW: {1}->{2}, SL: {3}->{4}, DW: {5}->{6}, DL: {7}->{8}, Points: {9}->{10}",
-                                _name.Text,
-                                _singlesWonOriginal.Text,
-                                _newSinglesWon,
-                                _singlesLostOriginal.Text,
-                                _newSinglesLost,
-                                _doublesWonOriginal.Text,
-                                _newDoublesWon,
-                                _doublesLostOriginal.Text,
-                                _newDoublesLost,
-                                _pointsOriginal.Text,
-                                _newPoints
-                                ));
+            get
+            {
+                return Int32.Parse(_singlesWonNew.Text);
+            }
+            set
+            {
+                _singlesWonNew.Text = value.ToString();
+                _singlesWonOriginal.Text = value.ToString();
+            }
         }
+
+        public int SignlesLost
+        {
+            get
+            {
+                return Int32.Parse(_singlesLostNew.Text);
+            }
+            set
+            {
+                _singlesLostNew.Text = value.ToString();
+                _singlesLostOriginal.Text = value.ToString();
+            }
+        }
+
+        public int Points
+        {
+            get
+            {
+                return Int32.Parse(_pointsNew.Text);
+            }
+            set
+            {
+                _pointsNew.Text = value.ToString();
+                _pointsOriginal.Text = value.ToString();
+            }
+        }
+
+        public void DisplayEditPanel()
+        {
+            _editPanel.Visible = true;
+        }
+
+        public bool IsValid()
+        {
+            int dummy;
+            return Int32.TryParse(_singlesWonNew.Text, out dummy) &&
+                            Int32.TryParse(_singlesLostNew.Text, out dummy) &&
+                            Int32.TryParse(_doublesWonNew.Text, out dummy) &&
+                            Int32.TryParse(_doublesLostNew.Text, out dummy) &&
+                            Int32.TryParse(_pointsNew.Text, out dummy);
+        }
+
+        #endregion
     }
 }

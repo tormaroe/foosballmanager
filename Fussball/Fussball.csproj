@@ -91,6 +91,7 @@
     <Compile Include="Charts\SparkLineDuo.aspx.designer.cs">
       <DependentUpon>SparkLineDuo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdjustPlayerController.cs" />
     <Compile Include="Controls\AddDoubleMatch.ascx.cs">
       <DependentUpon>AddDoubleMatch.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -170,7 +171,9 @@
     <Compile Include="Classes\SparkLineDuoData.cs" />
     <Compile Include="Controllers\AddUserController.cs" />
     <Compile Include="ViewDefinitions\IAddUserView.cs" />
+    <Compile Include="ViewDefinitions\IAdjustPlayerView.cs" />
     <Compile Include="ViewDefinitions\IView.cs" />
+    <Compile Include="ViewDefinitions\PlayerEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fussball.SimplePointsSystem\Fussball.SimplePointsSystem.csproj">
