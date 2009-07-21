@@ -53,10 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AddUserRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fussball.SimplePointsSystem\Fussball.SimplePointsSystem.csproj">
+      <Project>{AE73B4AA-3830-4B9D-BDCB-4CE2B7311A0C}</Project>
+      <Name>Fussball.SimplePointsSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fussball\Fussball.csproj">
       <Project>{5C9BF66E-6808-4F2D-8B49-F74D6577B017}</Project>
       <Name>Fussball</Name>

@@ -8,9 +8,7 @@ namespace Fussball.Controls
 {
     public partial class League : UserControl
     {
-        public delegate void LeagueMatchRemovedHandler(object sender, EventArgs e);
-
-        public event LeagueMatchRemovedHandler LeagueMatchRemoved;
+        public event EventHandler<EventArgs> LeagueMatchRemoved;
 
         protected void Page_Load(object sender, EventArgs e)
         {

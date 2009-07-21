@@ -7,9 +7,7 @@ namespace Fussball.Controls
 {
     public partial class AddDoubleMatch : UserControl
     {
-        public delegate void DoubleMatchAddedHandler(object sender, EventArgs e);
-
-        public event DoubleMatchAddedHandler DoubleMatchAdded;
+        public event EventHandler<EventArgs> DoubleMatchAdded;
 
         protected void Page_Load(object sender, EventArgs e)
         {
