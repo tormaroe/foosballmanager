@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using System.Collections;
 
-namespace Fussball.SimplePointsSystem.Test
+namespace Fussball.Test
 {
     public static class FluentAsserts
     {
