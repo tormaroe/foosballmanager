@@ -9,9 +9,7 @@ namespace Fussball.Controls
         private const int MINIMUM_LEAGUE_SIZE = 1;
         private const int MAXIMUM_LEAGUE_SIZE = 10;
 
-        public delegate void LeagueSettingsDoneHandler(object sender, EventArgs e);
-
-        public event LeagueSettingsDoneHandler LeagueSettingsDone;
+        public event EventHandler<EventArgs> LeagueSettingsDone;
 
         protected void _addPlayer_Click(object sender, EventArgs e)
         {

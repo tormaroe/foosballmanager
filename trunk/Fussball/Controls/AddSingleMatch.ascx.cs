@@ -6,11 +6,8 @@ namespace Fussball.Controls
 {
     public partial class AddSingleMatch : UserControl
     {
-        public delegate void SingleMatchAddedHandler(object sender, EventArgs e);
-        public delegate void LeagueMatchAddedHandler(object sender, EventArgs e);
-
-        public event SingleMatchAddedHandler SingleMatchAdded;
-        public event LeagueMatchAddedHandler LeagueMatchAdded;
+        public event EventHandler<EventArgs> SingleMatchAdded;
+        public event EventHandler<EventArgs> LeagueMatchAdded;
 
         protected void Page_Load(object sender, EventArgs e)
         {

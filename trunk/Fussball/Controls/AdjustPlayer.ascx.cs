@@ -12,9 +12,7 @@ namespace Fussball.Controls
         private int _newSinglesLost;
         private int _newSinglesWon;
 
-        public delegate void UserAdjustedHandler(object sender, EventArgs e);
-
-        public event UserAdjustedHandler UserAdjusted;
+        public event EventHandler<EventArgs> UserAdjusted;
 
         public void Show()
         {
