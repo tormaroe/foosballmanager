@@ -35,3 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("2.2.*")]
 
 [assembly: InternalsVisibleTo("Fussball.SimplePointsSystem.Test")]
+[assembly: InternalsVisibleTo("Fussball.Test")]

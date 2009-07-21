@@ -14,8 +14,9 @@ namespace Fussball.Test
         {
             Given_an_AddUserController();
             When_add_user_is_requested();
-            Assert.AreEqual(1, players.AllPlayers.Count);
-            Assert.AreEqual(ObiFoos, players.AllPlayers.First().Name);
+            players.AllPlayers.Count.should_be(1);
+            players.AllPlayers.First().Name.should_be(ObiFoos);
+            
         }
 
         [Test]
@@ -23,7 +24,7 @@ namespace Fussball.Test
         {
             Given_an_AddUserController();
             When_add_user_is_requested_with_empty_name();
-            Assert.AreEqual(0, players.AllPlayers.Count);
+            players.AllPlayers.should_be_empty();
         }
 
         Action Given_an_AddUserController = () =>

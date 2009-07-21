@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddUserRequest.cs" />
+    <Compile Include="AdjustPlayerSpecification.cs" />
+    <Compile Include="Common\FluentAsserts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
