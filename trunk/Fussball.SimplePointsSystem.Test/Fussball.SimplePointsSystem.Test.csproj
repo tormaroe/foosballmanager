@@ -53,7 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\FluentAsserts.cs" />
     <Compile Include="DoublesGameResultSpecification.cs" />
     <Compile Include="GameResultSpecificationsContext.cs" />
     <Compile Include="LeagueContext.cs" />
@@ -73,6 +72,10 @@
     <ProjectReference Include="..\Fussball.SimplePointsSystem\Fussball.SimplePointsSystem.csproj">
       <Project>{AE73B4AA-3830-4B9D-BDCB-4CE2B7311A0C}</Project>
       <Name>Fussball.SimplePointsSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Marosoft.Testing\Marosoft.Testing.csproj">
+      <Project>{8A368A02-E7D8-419D-9400-18E3D55D13CF}</Project>
+      <Name>Marosoft.Testing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using Fussball.SimplePointsSystem;
 using Moq;
+using Marosoft.Testing;
 
 namespace Fussball.Test
 {

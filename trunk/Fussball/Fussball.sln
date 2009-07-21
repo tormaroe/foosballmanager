@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fussball.SimplePointsSystem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fussball.Test", "..\Fussball.Test\Fussball.Test.csproj", "{9B6CA3F5-375A-408F-80AC-6E382BBDE728}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marosoft.Testing", "..\Marosoft.Testing\Marosoft.Testing.csproj", "{8A368A02-E7D8-419D-9400-18E3D55D13CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{9B6CA3F5-375A-408F-80AC-6E382BBDE728}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B6CA3F5-375A-408F-80AC-6E382BBDE728}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B6CA3F5-375A-408F-80AC-6E382BBDE728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A368A02-E7D8-419D-9400-18E3D55D13CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A368A02-E7D8-419D-9400-18E3D55D13CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A368A02-E7D8-419D-9400-18E3D55D13CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A368A02-E7D8-419D-9400-18E3D55D13CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
