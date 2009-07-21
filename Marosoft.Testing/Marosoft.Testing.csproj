@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9B6CA3F5-375A-408F-80AC-6E382BBDE728}</ProjectGuid>
+    <ProjectGuid>{8A368A02-E7D8-419D-9400-18E3D55D13CF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fussball.Test</RootNamespace>
-    <AssemblyName>Fussball.Test</AssemblyName>
+    <RootNamespace>Marosoft.Testing</RootNamespace>
+    <AssemblyName>Marosoft.Testing</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq, Version=3.1.416.3, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Moq.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\nunit.framework.dll</HintPath>
@@ -53,23 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddUserRequest.cs" />
-    <Compile Include="AdjustPlayerSpecification.cs" />
+    <Compile Include="FluentAsserts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Fussball.SimplePointsSystem\Fussball.SimplePointsSystem.csproj">
-      <Project>{AE73B4AA-3830-4B9D-BDCB-4CE2B7311A0C}</Project>
-      <Name>Fussball.SimplePointsSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fussball\Fussball.csproj">
-      <Project>{5C9BF66E-6808-4F2D-8B49-F74D6577B017}</Project>
-      <Name>Fussball</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Marosoft.Testing\Marosoft.Testing.csproj">
-      <Project>{8A368A02-E7D8-419D-9400-18E3D55D13CF}</Project>
-      <Name>Marosoft.Testing</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using NUnit.Framework;
 using System.Collections;
+using NUnit.Framework;
 
-namespace Fussball.SimplePointsSystem.Test
+namespace Marosoft.Testing
 {
     public static class FluentAsserts
     {

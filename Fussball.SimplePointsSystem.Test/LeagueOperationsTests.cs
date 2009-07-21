@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Marosoft.Testing;
 
 namespace Fussball.SimplePointsSystem.Test
 {
